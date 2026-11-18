@@ -11,6 +11,13 @@ public class MenuBuilder implements MenuStart, AfterStarter, AfterMainCourse, Af
     private String drink;
     private Dish currentDish;
 
+    private MenuBuilder() {
+    }
+
+    public static MenuStart create() {
+        return new MenuBuilder();
+    }
+
     @Override
     public AfterMainCourse withSupplement(String supplement) {
         this.supplement = supplement;
