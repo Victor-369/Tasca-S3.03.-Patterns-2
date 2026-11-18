@@ -5,9 +5,9 @@ import com.patterns.builder.Menu;
 public interface AfterMainCourse {
     public AfterMainCourse isVegan();
     public AfterMainCourse isGlutenFree();
-    public AfterMainCourse withSupplement();
-    public AfterDessert withDessert();
-    public AfterCoffee withCoffee();
-    public ReadyToBuild withDrink();
+    public AfterMainCourse withSupplement(String supplement);
+    public AfterDessert withDessert(String dessert);
+    public AfterCoffee withCoffee(String coffee);
+    public ReadyToBuild withDrink(String drink);
     public Menu build();
 }
