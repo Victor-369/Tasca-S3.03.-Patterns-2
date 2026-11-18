@@ -13,7 +13,7 @@ public class MenuBuilderTest {
     @Test
     @DisplayName("Executive menu shows all its parts in order")
     void build_executiveMenu_returnsAllPartsInOrder() {
-        Menu executiveMenu = new MenuBuilder()
+        Menu executiveMenu = MenuBuilder.create()
                 .withStarter("Amanida Mediterrània")
                 .isVegan()
                 .isGlutenFree()
@@ -37,7 +37,7 @@ public class MenuBuilderTest {
     @DisplayName("Vegan and gluten-free after the starter mark only the starter")
     void isVeganAndIsGlutenFree_calledAfterStarter_marksOnlyStarter() {
         try (MockedConstruction<Dish> dishes = mockConstruction(Dish.class)) {
-            new MenuBuilder()
+            MenuBuilder.create()
                     .withStarter("Amanida Mediterrània")
                     .isVegan()
                     .isGlutenFree()
@@ -60,7 +60,7 @@ public class MenuBuilderTest {
     @DisplayName("Vegan after the main course in a half menu marks the main course")
     void isVegan_calledAfterMainCourseInHalfMenu_marksMainCourseAsVegan() {
         try (MockedConstruction<Dish> dishes = mockConstruction(Dish.class)) {
-            new MenuBuilder()
+            MenuBuilder.create()
                     .withMainCourse("Risotto de bolets")
                     .isVegan()
                     .withCoffee("Espresso")
@@ -93,7 +93,7 @@ public class MenuBuilderTest {
     @Test
     @DisplayName("Children's menu shows no starter")
     void build_kidsMenu_omitsStarter() {
-        Menu kidsMenu = new MenuBuilder()
+        Menu kidsMenu = MenuBuilder.create()
                 .withMainCourse("Macarrons amb tomàquet")
                 .withDessert("Gelat de Vainilla")
                 .withDrink("Suc de taronja")
