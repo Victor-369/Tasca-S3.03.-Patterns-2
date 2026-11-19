@@ -70,8 +70,8 @@ The goal is to build a system in which a **stock agent** (the Observable) automa
 The sequence when the market rises:
 
 ```
-agent.stockMarketUp(150.75)
- ├─ currentValue     = 150.75
+agent.stockMarketUp(new BigDecimal("150.75"))
+ ├─ currentValue     = 150.75 (BigDecimal)
  ├─ isStockMarketUp  = true
  └─ notifyObservers()
      └─ for each observer:
@@ -86,13 +86,14 @@ agent.stockMarketUp(150.75)
 - **Open for extension.** A new kind of subscriber (an email alert, a log writer, a mobile app…) only needs to implement `Observer`. `StockAgent` does not change at all, which follows the **Open/Closed Principle**.
 - **Dynamic subscriptions.** Observers are kept in a `final List<Observer>`, and `addObserver(...)` / `removeObserver(...)` can be called at any time while the program runs.
 - **Push model.** The Observable *pushes* a ready-made message to each observer through `update(String message)`, so observers do not need to query the agent afterwards.
+- **`BigDecimal` for share values.** `stockMarketUp(...)` and `stockMarketDown(...)` take a `BigDecimal` rather than a `double`. Binary floating-point types cannot represent most decimal fractions exactly (for instance, `0.1 + 0.2` gives `0.30000000000000004`), so small rounding errors can creep in. `BigDecimal` stores the exact decimal value, which is the standard choice for prices and money. Create it from a `String`, as in `new BigDecimal("150.75")`, and not from a `double`, or the inaccuracy is carried over.
 - **Locale-independent formatting.** The value is formatted with `String.format(Locale.ROOT, "%.2f", value)`. This guarantees the output is always `150.75` and never `150,75`, whatever the locale of the machine running the code.
 
 ## Project structure
 
 ```
 observer/
-├── StockAgent.java          The Observable: stores observers, simulates the market, sends notifications
+├── StockAgent.java          The Observable: stores observers, simulates the market (BigDecimal values), sends notifications
 ├── StockBrokerAgency.java   A concrete Observer: prints every notification it receives
 └── interfaces/
     ├── Observable.java      addObserver(...), removeObserver(...), notifyObservers()
@@ -110,11 +111,11 @@ Observer zenithInvestments = new StockBrokerAgency("Zenith Investments");
 agent.addObserver(alphaBrokers);
 agent.addObserver(zenithInvestments);
 
-agent.stockMarketUp(150.75);
-agent.stockMarketDown(145.50);
+agent.stockMarketUp(new BigDecimal("150.75"));
+agent.stockMarketDown(new BigDecimal("145.50"));
 
 agent.removeObserver(zenithInvestments);
-agent.stockMarketUp(152.00);
+agent.stockMarketUp(new BigDecimal("152.00"));
 ```
 
 Console output:
