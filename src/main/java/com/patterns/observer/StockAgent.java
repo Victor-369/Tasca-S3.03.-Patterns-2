@@ -3,13 +3,14 @@ package com.patterns.observer;
 import com.patterns.observer.interfaces.Observable;
 import com.patterns.observer.interfaces.Observer;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class StockAgent implements Observable {
     private final List<Observer> observers;
-    private double currentValue;
+    private BigDecimal currentValue;
     private boolean isStockMarketUp;
 
     public StockAgent() {
@@ -27,13 +28,13 @@ public class StockAgent implements Observable {
         this.observers.remove(observer);
     }
 
-    public void stockMarketUp(double value) {
+    public void stockMarketUp(BigDecimal value) {
         this.currentValue = value;
         this.isStockMarketUp = true;
         notifyObservers();
     }
 
-    public void stockMarketDown(double value) {
+    public void stockMarketDown(BigDecimal value) {
         this.currentValue = value;
         this.isStockMarketUp = false;
         notifyObservers();
