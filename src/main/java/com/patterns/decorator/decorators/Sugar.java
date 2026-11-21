@@ -1,5 +1,6 @@
-package com.patterns.decorator;
+package com.patterns.decorator.decorators;
 
+import com.patterns.decorator.BubbleTeaDecorator;
 import com.patterns.decorator.interfaces.BubbleTea;
 
 public class Sugar extends BubbleTeaDecorator {
