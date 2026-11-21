@@ -8,6 +8,7 @@ Java exercises from IT Academy (Java specialisation, Sprint 3) that put classic 
 |-------|---------|------|----------|---------------|
 | 1 | **Builder** | Creational | Restaurant menus built with a Fluent Builder and progressive interfaces | [builder/README.md](src/main/java/com/patterns/builder/README.md) |
 | 2 | **Observer** | Behavioural | Stock market notifications sent from a stock agent to stockbroking agencies | [observer/README.md](src/main/java/com/patterns/observer/README.md) |
+| 3 | **Decorator** | Structural | Bubble teas customised at runtime by wrapping a base in extras | [decorator/README.md](src/main/java/com/patterns/decorator/README.md) |
 
 Each package has its own README, explaining the pattern, the exercise, the design decisions and how to use the code.
 
@@ -29,13 +30,21 @@ src/
 │   │   ├── Menu.java
 │   │   ├── MenuBuilder.java
 │   │   └── interfaces/     Progressive step interfaces
-│   └── observer/           Level 2 — Observer pattern
-│       ├── StockAgent.java
-│       ├── StockBrokerAgency.java
-│       └── interfaces/     Observable and Observer
+│   ├── observer/           Level 2 — Observer pattern
+│   │   ├── StockAgent.java
+│   │   ├── StockBrokerAgency.java
+│   │   └── interfaces/     Observable and Observer
+│   └── decorator/          Level 3 — Decorator pattern
+│       ├── BubbleTeaDecorator.java
+│       ├── LatteBase.java
+│       ├── MatchaBase.java
+│       ├── TeaBase.java
+│       ├── decorators/     Ice, Sugar, Tapioca and Flavor
+│       └── interfaces/     BubbleTea
 └── test/java/com/patterns/
     ├── builder/MenuBuilderTest.java
-    └── observer/StockAgentTest.java
+    ├── observer/StockAgentTest.java
+    └── decorator/BubbleTeaTest.java
 ```
 
 ## Getting started
@@ -55,6 +64,7 @@ Run the tests for a single pattern:
 ```bash
 mvn test -Dtest=MenuBuilderTest
 mvn test -Dtest=StockAgentTest
+mvn test -Dtest=BubbleTeaTest
 ```
 
 ## Licence
